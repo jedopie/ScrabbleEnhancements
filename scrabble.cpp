@@ -25,7 +25,7 @@ void showMenu();
 void loadGame();
 void startNewGame();
 bool isUpper(string &input);
-void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* game);
+void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* game, int numPlayers);
 vector<string> splitStringToVec(string input, vector<string> vec);
 void printWinner(vector<Player*> players, Player* winner);
 inline bool fileExists (const std::string& name);
@@ -123,63 +123,133 @@ void showMenu() {
 }
 
 void startNewGame() {
+   string player1Name;
+   string player2Name;
+   string player3Name;
+   string player4Name;
+   vector<Player*> players;
+   cout << "1. 2 Player Mode" << endl;
+   cout << "2. 3 Player Mode" << endl;
+   cout << "3. 4 Player Mode" << endl;
+   string numPlayers;
+   cout << "> ";
+   cin >> numPlayers;
+
+   while (numPlayers != "2" && numPlayers !="3" && numPlayers !="4") {
+       cout << "Invalid Input. Please Try Again" << endl;
+       cin >> numPlayers;
+    }
    Game* game = new Game();
     // shuffled tileBag initalised
     LinkedList* tileBag = game->getTileBag();
 
     cout << "Starting a New Game \n" << endl;
-    cout << "Enter a name for Player 1 (Uppercase characters only)" << endl;
-    cout << "> ";
-    string player1Name;
-    cin >> player1Name; // grab player1 name from user input
-    if (cin.eof()) {
-           exit(EXIT_SUCCESS);
-        }
-    while (!isUpper(player1Name)) {
-        cout << "Sorry, please enter a name with uppercase characters" << endl;
+    if (numPlayers =="2" || numPlayers=="3" || numPlayers=="4") {
+      cout << "Enter a name for Player 1 (Uppercase characters only)" << endl;
+      cout << "> ";
+      //  string player1Name;
+      cin >> player1Name; // grab player1 name from user input
+      if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+      while (!isUpper(player1Name)) {
+         cout << "Sorry, please enter a name with uppercase characters" << endl;
 
-        cin >> player1Name;
-        if (cin.eof()) {
-           exit(EXIT_SUCCESS);
-        }
+         cin >> player1Name;
+         if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+      }
+
+      cout << "\n" << endl;
+      cout << "Enter a name for Player 2 (Uppercase characters only)" << endl;
+      cout << "> ";
+      //  string player2Name;
+      cin >> player2Name;
+      if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+
+      while (!isUpper(player2Name)) {
+         cout << "Sorry, please enter a name with uppercase characters" << endl;
+
+         cin >> player2Name;
+         if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+      }
+      Player* player1 = new Player(player1Name);
+      Player* player2 = new Player(player2Name);
+      players.push_back(player1);
+      players.push_back(player2);
+    }
+    if (numPlayers == "3" || numPlayers =="4") {
+      cout << "\n" << endl;
+      cout << "Enter a name for Player 3 (Uppercase characters only)" << endl;
+      cout << "> ";
+      //  string player2Name;
+      cin >> player3Name;
+      if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+
+      while (!isUpper(player3Name)) {
+         cout << "Sorry, please enter a name with uppercase characters" << endl;
+
+         cin >> player3Name;
+         if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+      }
+      Player* player3 = new Player(player3Name);
+      players.push_back(player3);
+    }
+    if (numPlayers =="4") {
+      cout << "\n" << endl;
+      cout << "Enter a name for Player 4 (Uppercase characters only)" << endl;
+      cout << "> ";
+      //  string player2Name;
+      cin >> player4Name;
+      if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+
+      while (!isUpper(player4Name)) {
+         cout << "Sorry, please enter a name with uppercase characters" << endl;
+
+         cin >> player4Name;
+         if (cin.eof()) {
+            exit(EXIT_SUCCESS);
+         }
+      }
+      Player* player4 = new Player(player4Name);
+      players.push_back(player4);
     }
 
-    cout << "\n" << endl;
-    cout << "Enter a name for Player 2 (Uppercase characters only)" << endl;
-    cout << "> ";
-    string player2Name;
-    cin >> player2Name;
-    if (cin.eof()) {
-           exit(EXIT_SUCCESS);
-        }
-
-    while (!isUpper(player2Name)) {
-        cout << "Sorry, please enter a name with uppercase characters" << endl;
-
-        cin >> player2Name;
-        if (cin.eof()) {
-           exit(EXIT_SUCCESS);
-        }
-    }
+   //  }
     cout << endl;
     cout << "Type \"help\" at anytime for information on how to play!" << endl;
     cout << "Let's Play!" << endl;
     cout << endl;
 
-    Player* player1 = new Player(player1Name); // create player objects
-    Player* player2 = new Player(player2Name);
+   //  Player* player1 = new Player(player1Name); // create player objects
+   //  Player* player2 = new Player(player2Name);
 
-    game->addPlayers(player1,player2); // add to game.
-    vector<Player*> players = game->getPlayers();
+   //  game->addPlayers(player1,player2); // add to game.
+   //  vector<Player*> players = game->getPlayers();
 
 
 
-    player1->initalisePlayerHand(tileBag); // take 7 tiles from tileBag
-    player2->initalisePlayerHand(tileBag);
+   //  player1->initalisePlayerHand(tileBag); // take 7 tiles from tileBag
+   //  player2->initalisePlayerHand(tileBag);
+   for (int i=0; i < players.size(); i++) {
+      players[i]->initalisePlayerHand(tileBag);
+   }
 
     Board* board = game->getBoard(); // declare & initalise board
+    int playerAmount = std::stoi(numPlayers);
 
-   playGame(tileBag, players, board, game); // Run main game loop
+   playGame(tileBag, players, board, game, playerAmount); // Run main game loop
 }
 
 bool isUpper(string &input) {
@@ -309,18 +379,19 @@ void loadGame() {
          players[i]->addTilesToHand(tileBag);
       }
    }
+   int numPlayers=0;
 
-   playGame(tileBag, players, board, game);
+   playGame(tileBag, players, board, game, numPlayers);
 
 }
 
-void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* game) {
+void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* game, int numPlayers) {
    string input;
     char c;
     // int i = 0;
     while (tileBag->size() > 0) {
        cout << endl;
-      for (int i = 0; i < NUM_PLAYERS; i++) {
+      for (int i = 0; i < numPlayers; i++) {
             cout << players[i]->getName() << ", it's your turn" << endl; // prints name of current player
             cout << "Score for " << players[0]->getName() << ": " << players[0]->getScore() << endl; //name of player1
             cout << "Score for " << players[1]->getName() << ": " << players[1]->getScore() << endl; // name of player2
