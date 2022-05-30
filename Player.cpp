@@ -86,7 +86,7 @@ void Player::replaceTile(char character, LinkedList* tileBag) {
 void Player::addTilesToHand(LinkedList* tileBag) {
     int length = getPlayerHand()->size();
     // Tile* tile;
-    while (length <7) {
+    while (length <7 && tileBag->size() != 0) { // while player has less than 7 tiles and tileBag not empty, take tile from bag
         Tile* bagTail = tileBag->getTail();
         Tile* tile = new Tile(*bagTail);
         getPlayerHand()->addBack(tile);
