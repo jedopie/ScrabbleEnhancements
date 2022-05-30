@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "LinkedList.h"
+#include "Player.h"
 
 using std::string;
 using std::vector;
@@ -22,12 +23,19 @@ class Load {
     vector<string> getTileBag();
     vector<string> getPlayer1Hand();
     vector<string> getPlayer2Hand();
+    vector<string> getPlayer3Hand();
+    vector<string> getPlayer4Hand();
     vector<string> getTilePositions();
     string getPlayer1Name();
     string getPlayer2Name();
+    string getPlayer3Name();
+    string getPlayer4Name();
     int getPlayer1Score();
     int getPlayer2Score();
+    int getPlayer3Score();
+    int getPlayer4Score();
     string getCurrentPlayer();
+    int getNumPlayers();
 
     private:
     string fileName;
@@ -40,11 +48,23 @@ class Load {
     int player2Score;
     vector<string> player2Hand;
 
+    string player3Name;
+    int player3Score;
+    vector<string> player3Hand;
+
+    string player4Name;
+    int player4Score;
+    vector<string> player4Hand;
+
     vector<string> tileBag;
 
     vector<string> tilePositions;
 
     string currentTurn;
+
+    vector<Player*> players;
+
+    int numPlayers;
 
 
 };

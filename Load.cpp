@@ -6,15 +6,6 @@
 Load::Load(string fileName) {
     this->fileName = fileName;
 
-    player1Name = "";
-    player1Score = 0;
-    player1Hand = {};
-
-    player2Name = "";
-    player1Score = 0;
-    player2Hand = {};
-
-    tileBag = {};
 }
 // Loads lines into their respective containers
 // Player hand and tileBag first stored as vectors, to where they can be made into tile objects.
@@ -25,6 +16,8 @@ void Load::loadGame(string fileName) {
     file.open(fileName);
 
     if(file.is_open()) {
+        getline(file,text);
+        numPlayers = std::stoi(text);
         getline(file,text);
         player1Name = text;
         getline(file,text);
@@ -38,6 +31,24 @@ void Load::loadGame(string fileName) {
         player2Score = std::stoi(text);
         getline(file,text);
         player2Hand = splitStringToVec(text,player2Hand);
+
+        if (numPlayers ==3 || numPlayers == 4) {
+            getline(file,text);
+            player3Name = text;
+            getline(file, text);
+            player3Score = std::stoi(text);
+            getline(file,text);
+            player3Hand = splitStringToVec(text,player3Hand);
+        }
+
+        if (numPlayers == 4) {
+            getline(file,text);
+            player4Name = text;
+            getline(file, text);
+            player4Score = std::stoi(text);
+            getline(file,text);
+            player4Hand = splitStringToVec(text,player4Hand);
+        }
 
         getline(file,text);
         tilePositions = splitStringToVec(text,tileBag);
@@ -94,4 +105,39 @@ vector<string> Load::getTilePositions() {
 
 string Load::getCurrentPlayer() {
     return currentTurn;
+}
+
+// void Load::setPlayers(vector<Player*> players) {
+//     this->players = players;
+// }
+
+// vector<Player*> Load::getPlayers() {
+//     return this->players;
+// }
+
+int Load::getNumPlayers() {
+    return numPlayers;
+}
+
+string Load::getPlayer3Name() {
+    return player3Name;
+}
+
+int Load::getPlayer3Score() {
+    return player3Score;
+}
+string Load::getPlayer4Name() {
+    return player4Name;
+}
+
+int Load::getPlayer4Score() {
+    return player4Score;
+}
+
+vector<string> Load::getPlayer3Hand() {
+    return player3Hand;
+}
+
+vector<string> Load::getPlayer4Hand() {
+    return player4Hand;
 }
