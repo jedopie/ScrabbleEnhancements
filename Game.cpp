@@ -11,9 +11,8 @@ Game::~Game() {
 
 }
 
-void Game::addPlayers(Player* player1, Player* player2) {
-    players.push_back(player1);
-    players.push_back(player2);
+void Game::addPlayers(vector<Player*> players) {
+    this->players = players;
 }
 
 vector<Player*> Game::getPlayers() {
@@ -25,41 +24,39 @@ LinkedList* Game::getTileBag() {
 }
 
 // Save game to .save file (Still need board)
-void Game::saveGame(string fileName) {
-    Player* player1 = players[PLAYER1INDEX];
-    Player* player2 = players[PLAYER2INDEX];
+void Game::saveGame(string fileName, int numPlayers) {
+    ofstream saveFile;
+    saveFile.open(fileName + ".save");
+    saveFile << numPlayers << "\n";
 
-    string player1Name = player1->getName();
-    int player1Score = player1->getScore();
-    LinkedList* player1Hand = player1->getPlayerHand();
+    for (int i =0; i < numPlayers; i++) { // iterate through players
+        string playerName = players[i]->getName(); //Write player details to file
+        int playerScore = players[i]->getScore();
+        LinkedList* playerHand = players[i]->getPlayerHand();
+        
+        saveFile << playerName << "\n"; // write name
+        saveFile << playerScore << "\n"; // write score
+        printLinkedList(saveFile, playerHand); //print hand
+        if (i != numPlayers -1) {
+            saveFile << "\n";
+        }
 
-    string player2Name = player2->getName();
-    int player2Score = player2->getScore();
-    LinkedList* player2Hand = player2->getPlayerHand();
+    }
     
     vector<string> placedTiles = board->getPlacedTiles();
     // then board
     // tileBag already defined
     string currentPlayer;
-    if (player1->isCurrentTurn() == true) {
-        currentPlayer = player1->getName();
+
+    // Check for current player
+    for (int i= 0; i < numPlayers; i++) {
+        if (players[i]->isCurrentTurn() == true) {
+            currentPlayer = players[i]->getName();
+        }
+        else {
+            players[0]->isCurrentTurn();
+        }
     }
-    else {
-        currentPlayer = player2->getName();
-    }
-
-    ofstream saveFile;
-    saveFile.open(fileName + ".save");
-    saveFile << player1Name << "\n";
-    saveFile << player1Score << "\n";
-    printLinkedList(saveFile, player1Hand);
-
-    saveFile << "\n";
-
-    saveFile << player2Name << "\n";
-    saveFile << player2Score << "\n";
-    printLinkedList(saveFile, player2Hand);
-
     saveFile << "\n";
 
     // print board
