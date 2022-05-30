@@ -27,7 +27,7 @@ void startNewGame();
 bool isUpper(string &input);
 void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* game, int numPlayers);
 vector<string> splitStringToVec(string input, vector<string> vec);
-void printWinner(vector<Player*> players, Player* winner);
+void printWinner(vector<Player*> players);
 inline bool fileExists (const std::string& name);
 int returnCharValue(char c);
 void saveHighScore(string fileName, vector<std::pair<int,string> > highScores);
@@ -128,9 +128,9 @@ void startNewGame() {
    string player3Name;
    string player4Name;
    vector<Player*> players;
-   cout << "1. 2 Player Mode" << endl;
-   cout << "2. 3 Player Mode" << endl;
-   cout << "3. 4 Player Mode" << endl;
+   cout << "2 Player Mode: Enter \'2\'" << endl;
+   cout << "3 Player Mode: Enter \'3\'" << endl;
+   cout << "4 Player Mode: Enter \'4\'" << endl;
    string numPlayers;
    cout << "> ";
    cin >> numPlayers;
@@ -232,16 +232,8 @@ void startNewGame() {
     cout << "Let's Play!" << endl;
     cout << endl;
 
-   //  Player* player1 = new Player(player1Name); // create player objects
-   //  Player* player2 = new Player(player2Name);
+   game->addPlayers(players);
 
-   //  game->addPlayers(player1,player2); // add to game.
-   //  vector<Player*> players = game->getPlayers();
-
-
-
-   //  player1->initalisePlayerHand(tileBag); // take 7 tiles from tileBag
-   //  player2->initalisePlayerHand(tileBag);
    for (int i=0; i < players.size(); i++) {
       players[i]->initalisePlayerHand(tileBag);
    }
@@ -267,8 +259,9 @@ vector<string> splitStringToVec(string input, vector<string> vec){
     return vec;
 }
 
-void printWinner(vector<Player*> players, Player* winner) {
+void printWinner(vector<Player*> players) {
    // Read high score text file
+   Player* winner = nullptr;
    string fileName = "highScores.txt";
    ifstream file;
    vector<std::pair<int,string> > highScores; //create vector with score-name pairs
@@ -290,14 +283,17 @@ void printWinner(vector<Player*> players, Player* winner) {
    saveHighScore(fileName, highScores); //save new high scores to file
 
    cout << "Game over" << endl;
-   cout << "Score for " << players[0]->getName() << ": " << players[0]->getScore() << endl;
-   cout << "Score for " << players[1]->getName() << ": " << players[1]->getScore() << endl;
-   if (players[0] == winner) {
-      cout << "Player " << players[0]->getName() << " won!" << endl;
+   for (int i =0; i < players.size(); i++) {
+      cout << "Score for " << players[i]->getName() << ": " << players[i]->getScore() << endl;
    }
-   else {
-      cout << "Player " << players[1]->getName() << " won!" << endl;
+   winner = players[0];
+
+   for (int i =0; i < players.size(); i++) {
+      if (players[i]->getScore() > winner->getScore()) {
+         winner = players[i];
+      }
    }
+    cout << "Player " << winner->getName() << " won!" << endl;
 
    cout << endl;
    printTopScores();
@@ -308,6 +304,7 @@ void printWinner(vector<Player*> players, Player* winner) {
 }
 
 void loadGame() {
+   vector<Player*> players;
    string fileName;
    cout << endl;
    cout << "Enter the file name from which load a game" << endl;
@@ -326,6 +323,7 @@ void loadGame() {
    }
    Load* load = new Load(fileName);
    load->loadGame(fileName);
+   int numPlayers = load->getNumPlayers();
    // Create player objects
    Player* player1 = new Player(load->getPlayer1Name());
    player1->setScore(load->getPlayer1Score()); // set score
@@ -336,16 +334,53 @@ void loadGame() {
       Tile* tile = new Tile(load->getPlayer1Hand()[i][0], j);
       player1->getPlayerHand()->addBack(tile);
    }
+   players.push_back(player1); //add players to vector for gameLoop
    // create Player2 object
    Player* player2 = new Player(load->getPlayer2Name());
    player2->setScore(load->getPlayer2Score());
 
    // set player2's hand
    for (int i =0; i < load->getPlayer2Hand().size(); i++) {
-      int j = load->getPlayer2Hand()[i][2] - '0';
-      Tile* tile = new Tile(load->getPlayer2Hand()[i][0], j);
-      player2->getPlayerHand()->addBack(tile);
+      int j = load->getPlayer2Hand()[i][2] - '0'; // get value of letter
+      Tile* tile = new Tile(load->getPlayer2Hand()[i][0], j); // make tile with first char of vector for tile letter
+      player2->getPlayerHand()->addBack(tile); //add tile to player hand
    }
+   players.push_back(player2);
+
+   if (numPlayers ==3 || numPlayers==4) { //if 3 or 4 player mode
+      Player* player3 = new Player(load->getPlayer3Name()); //create player object
+      player3->setScore(load->getPlayer3Score()); // score
+      for (int i =0; i < load->getPlayer3Hand().size(); i++) {
+         int j = load->getPlayer3Hand()[i][2] - '0';
+         Tile* tile = new Tile(load->getPlayer3Hand()[i][0], j);
+         player3->getPlayerHand()->addBack(tile);
+      }
+      players.push_back(player3);
+   }
+   if (numPlayers==4) {
+      Player* player4 = new Player(load->getPlayer4Name());
+      player4->setScore(load->getPlayer4Score());
+      for (int i =0; i < load->getPlayer4Hand().size(); i++) {
+         int j = load->getPlayer4Hand()[i][2] - '0';
+         Tile* tile = new Tile(load->getPlayer4Hand()[i][0], j);
+         player4->getPlayerHand()->addBack(tile);
+      }
+      players.push_back(player4);
+   }
+   vector<Player*> finalPlayers; // finalPlayers sequencing for starting player
+   // if player is current, add to final players
+   for (int i =0; i < players.size(); i++) {
+      if (load->getCurrentPlayer() == players[i]->getName()) {
+         finalPlayers.push_back(players[i]);
+      }
+   }
+   //  if player is not in finalPlayers, add to finalPlayers
+   for (int i =0; i < players.size(); i++) {
+      if (!(std::find(std::begin(finalPlayers), std::end(finalPlayers), players[i]) != std::end(finalPlayers))) {
+         finalPlayers.push_back(players[i]);
+      }
+   }
+
    Game* game = new Game();
    LinkedList* tileBag = game->getTileBag(); // get linked list
    tileBag->clearLinkedList(); // Clear shuffled linked list
@@ -364,24 +399,18 @@ void loadGame() {
       Tile* tile = new Tile(c, returnCharValue(c)); //Create new tile
       board->insertTile(position, tile); // Insert tile at given position
    }
-   if (load->getCurrentPlayer() == player1->getName()) {
-      game->addPlayers(player1,player2);
-   }
-   else {
-      game->addPlayers(player2,player1);
-   }
+
    cout << endl;
    cout << "Scrabble Game Successfully Loaded!" << endl;
-   vector<Player*> players = game->getPlayers();
 
    for (int i =0; i < players.size(); i++) {
       if (players[i]->getPlayerHand()->size() < 7) {
          players[i]->addTilesToHand(tileBag);
       }
    }
-   int numPlayers=0;
+   game->addPlayers(finalPlayers); //register players for saving mechanic
 
-   playGame(tileBag, players, board, game, numPlayers);
+   playGame(tileBag, finalPlayers, board, game, numPlayers);
 
 }
 
@@ -392,9 +421,14 @@ void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* 
     while (tileBag->size() > 0) {
        cout << endl;
       for (int i = 0; i < numPlayers; i++) {
+            if (tileBag->size() < 1) {
+                     printWinner(players);
+                  }
+            players[i]->setCurrentTurn();
             cout << players[i]->getName() << ", it's your turn" << endl; // prints name of current player
-            cout << "Score for " << players[0]->getName() << ": " << players[0]->getScore() << endl; //name of player1
-            cout << "Score for " << players[1]->getName() << ": " << players[1]->getScore() << endl; // name of player2
+            for (int i = 0; i < numPlayers; i++) {
+               cout << "Score for " << players[i]->getName() << ": " << players[i]->getScore() << endl; //print name and scores
+            }
             board->printBoard(); // print the board
             cout << endl;
             cout << "Your hand is" << endl;
@@ -405,6 +439,7 @@ void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* 
                if (cin.eof()) {
                   exit(EXIT_SUCCESS);
                }
+
                vector<string> inputs; 
                inputs = splitStringToVec(input, inputs);
 
@@ -444,12 +479,9 @@ void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* 
                   if (players[i]->getPassTally() == 2) {
                      cout << "That was " << players[i]->getName() << "'s second pass in a row!" << endl;
                      cout << endl;
-                     if (i ==0) {
-                        printWinner(players, players[1]);
-                     }
-                     else {
-                        printWinner(players, players[0]);
-                     }
+                     cout << "Game Over" << endl;
+                     cout << "Goodbye" << endl;
+                     exit(EXIT_SUCCESS);
                   }
                   else {
                      input = "done";
@@ -481,15 +513,17 @@ void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* 
                }
 
                else if (inputs[0] == "save") { 
-                  game->saveGame(inputs[1]); // save game with fileName given by user
+                  cout << inputs[1];
+                  game->saveGame(inputs[1],numPlayers); // save game with fileName given by user
                   cout << endl;
                   cout << "Game successfully saved" << endl;
                }
 
                else if (input == "done") {
-                  players[i]->addTilesToHand(tileBag); //add tiles to player's hand if size < 7
                   cout << endl;
                }
+
+               // HELP MENU - MILESTONE 3
                else if (input == "help") {
                   cout << "1. Placing a Tile:" << endl;
                   cout << "   To place a letter on the board, choose a tile from your hand and a coordinate to place it." << endl;
@@ -518,23 +552,14 @@ void playGame(LinkedList* tileBag, vector<Player*> players, Board* board, Game* 
                else {
                   cout << "Invalid Entry. Try again." << endl;
                }
-               if (tileBag->size() < 1) {
-                  if (players[0]->getScore() > players[1]->getScore()) { // if game runs out, player with highest score wins
-                        printWinner(players,players[0]);
-                        }
-                  else {
-                     printWinner(players,players[1]);
-                     }
-               }
          } while (input != "done");
+         players[i]->addTilesToHand(tileBag); // once turn is complete, add tile to fill hand (will only add if needed)
+         players[i]->endCurrentTurn();
       }
       }
-      if (players[0]->getScore() > players[1]->getScore()) { // if game runs out, player with highest score wins
-         printWinner(players,players[0]);
-      }
-      else {
-         printWinner(players,players[1]);
-      }
+
+      printWinner(players); // once tileBag is empty, print winners
+
 
 }
 // Checks if file can be found
@@ -574,8 +599,8 @@ void saveHighScore(string fileName, vector<std::pair<int,string> > highScores) {
     ofstream saveFile;
     saveFile.open(fileName);
     if (saveFile.is_open()) {
-        for (int i =0; i < highScores.size(); i++) {
-           if (i < highScores.size() -1) {
+        for (int i =0; i < highScores.size(); i++) { //iterate through score,name pairs
+           if (i < highScores.size() -1) { // print new line if not last index
                saveFile << highScores[i].first << " " << highScores[i].second << "\n";
            }
            else {
@@ -591,11 +616,11 @@ void printTopScores() {
    cout << "---------------HIGH SCORES---------------" << endl;
    cout << "RANK:          SCORE:            NAME:          " << endl;
    if (file.is_open()) {
-      for (int i =0; i < 5; i++) {
+      for (int i =0; i < 5; i++) { // read first instances from file
          string score,name;
          file >> score;
          file >> name;
-         cout << " " << i+1 << "              " << score << "               " << name << endl;
+         cout << " " << i+1 << "              " << score << "               " << name << endl; // print rank,score,name
       }
    }
 }
