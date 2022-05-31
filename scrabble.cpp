@@ -134,6 +134,9 @@ void startNewGame() {
    string numPlayers;
    cout << "> ";
    cin >> numPlayers;
+   if (cin.eof()) {
+      exit(EXIT_SUCCESS);
+   }
 
    while (numPlayers != "2" && numPlayers !="3" && numPlayers !="4") {
        cout << "Invalid Input. Please Try Again" << endl;
