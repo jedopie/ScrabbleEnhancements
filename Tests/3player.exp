@@ -1,0 +1,41 @@
+Welcome to Scrabble!
+-------------------
+Menu
+----
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Type "help" for further information
+
+> 
+Enter the file name from which load a game
+> 
+Scrabble Game Successfully Loaded!
+
+JIM, it's your turn
+Score for JIM: 0
+Score for JED: 1
+Score for JON: 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+  ------------------------------------------------------------
+A|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+B|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+C| E |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+D|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+E|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+F|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+G|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+H|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+I|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+J|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+K|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+L|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+M|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+N|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+O|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+
+Your hand is
+L-1,A-1,Y-4,S-1,K-5,Q-1,E-1
+> Goodbye

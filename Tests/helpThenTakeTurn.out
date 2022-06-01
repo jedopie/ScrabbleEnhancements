@@ -1,0 +1,88 @@
+Welcome to Scrabble!
+-------------------
+Menu
+----
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Type "help" for further information
+
+> 
+Enter the file name from which load a game
+> 
+Scrabble Game Successfully Loaded!
+
+MO, it's your turn
+Score for MO: 0
+Score for JE: 4
+Score for AL: 8
+Score for SE: 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+  ------------------------------------------------------------
+A|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+B|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+C|   | F |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+D|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+E|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+F|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+G|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+H|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+I|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+J|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+K|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+L|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+M|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+N|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+O| J |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+
+Your hand is
+L-1,E-1,E-1,W-4,E-1,A-1,N-1
+> 1. Placing a Tile:
+   To place a letter on the board, choose a tile from your hand and a coordinate to place it.
+   To implement this, type "place <letter> at <coordinate>" - Make sure it is within the bounds of the board!
+   An example for your hand: place L at A0
+
+2. Replace a Tile in Your Hand
+   Replacing a letter in your hand will replace your chosen letter with another from the tile bag.
+   To do this, type "replace <letter>" - Make sure the chosen letter is in your hand!
+   An example for your hand: replace L
+
+3. Pass Turn
+   You may pass your turn if you don't want to take your turn. Be careful though, two passes in a row will end the game!
+   To do this, type "pass"
+   Doing so will automatically end your turn
+
+4. Quit Game
+   To safely quit the game, simply type "quit"
+5. Save Game
+   In order to save your game for a later time, type "save <filename>"
+Once you have entered your move(s), enter "done" to end your turn
+> 
+JE, it's your turn
+Score for MO: 0
+Score for JE: 4
+Score for AL: 8
+Score for SE: 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+  ------------------------------------------------------------
+A|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+B|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+C|   | F |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+D|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+E|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+F|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+G|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+H|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+I|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+J|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+K|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+L|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+M|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+N|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+O| J |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+
+Your hand is
+I-1,C-3,H-4,R-1,R-1,A-1,L-1
+> 

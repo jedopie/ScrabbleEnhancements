@@ -1,0 +1,58 @@
+Welcome to Scrabble!
+-------------------
+Menu
+----
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Type "help" for further information
+
+> 
+Enter the file name from which load a game
+> 
+Scrabble Game Successfully Loaded!
+
+MO, it's your turn
+Score for MO: 0
+Score for JE: 4
+Score for AL: 8
+Score for SE: 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+  ------------------------------------------------------------
+A|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+B|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+C|   | F |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+D|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+E|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+F|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+G|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+H|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+I|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+J|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+K|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+L|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+M|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+N|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+O| J |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+
+Your hand is
+L-1,E-1,E-1,W-4,E-1,A-1,N-1
+> > > > 
+Game over
+Score for MO: 3
+Score for JE: 4
+Score for AL: 8
+Score for SE: 0
+Player AL won!
+
+---------------HIGH SCORES---------------
+RANK:          SCORE:            NAME:          
+ 1              140               JED
+ 2              130               ELOISE
+ 3              100               JACK
+ 4              99               JIM
+ 5              98               JESS
+
+Goodbye

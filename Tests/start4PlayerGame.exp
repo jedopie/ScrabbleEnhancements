@@ -1,0 +1,27 @@
+Welcome to Scrabble!
+-------------------
+Menu
+----
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Type "help" for further information
+
+> 2 Player Mode: Enter '2'
+3 Player Mode: Enter '3'
+4 Player Mode: Enter '4'
+> Starting a New Game 
+
+Enter a name for Player 1 (Uppercase characters only)
+> 
+
+Enter a name for Player 2 (Uppercase characters only)
+> 
+
+Enter a name for Player 3 (Uppercase characters only)
+> 
+
+Enter a name for Player 4 (Uppercase characters only)
+> Sorry, please enter a name with uppercase characters

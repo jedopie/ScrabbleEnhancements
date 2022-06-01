@@ -1,0 +1,56 @@
+Welcome to Scrabble!
+-------------------
+Menu
+----
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Type "help" for further information
+
+> 
+Enter the file name from which load a game
+> 
+Scrabble Game Successfully Loaded!
+
+JIM, it's your turn
+Score for JIM: 0
+Score for JED: 180
+Score for JON: 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+  ------------------------------------------------------------
+A|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+B|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+C| E |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+D|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+E|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+F|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+G|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+H|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+I|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+J|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+K|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+L|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+M|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+N|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+O|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 
+
+Your hand is
+L-1,A-1,Y-4,S-1,K-5,Q-1,E-1
+> > > > 
+Game over
+Score for JIM: 3
+Score for JED: 180
+Score for JON: 0
+Player JED won!
+
+---------------HIGH SCORES---------------
+RANK:          SCORE:            NAME:          
+ 1              180               JED
+ 2              140               JED
+ 3              130               ELOISE
+ 4              100               JACK
+ 5              99               JIM
+
+Goodbye
