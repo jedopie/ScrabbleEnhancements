@@ -109,10 +109,11 @@ void showMenu() {
          exit(EXIT_SUCCESS);
       }
       else if (input == "help") {
+         cout << endl;
          cout << "To start a new game, enter \'1\'." << endl;
          cout << "To load a past game, enter  \'2\'." << endl;
          cout << "To show the credits of our application, enter \'3\'." << endl;
-         cout << "To safely quit the application, enter \'4\'." << endl;
+         cout << "To safely quit the application, enter \'4\'.\n" << endl;
       }
       else {
          cout << "Invalid entry. Please try again" << endl;
